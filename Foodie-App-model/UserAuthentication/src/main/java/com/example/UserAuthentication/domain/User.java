@@ -1,12 +1,14 @@
 package com.example.UserAuthentication.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class User {
     @Id
-    private int userId;
+    private String userId;
     private String email;
     private String password;
 
@@ -14,17 +16,17 @@ public class User {
     {
 
     }
-    public User(int userId, String email, String password) {
+    public User(String userId, String email, String password) {
         this.userId = userId;
         this.email = email;
         this.password = password;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

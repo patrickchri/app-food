@@ -2,38 +2,38 @@ package com.example.user_service.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.multipart.MultipartFile;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
-@Document
+@Document(collection = "user")
 public class User {
     @Id
-    private int userId;
+    private String userId;
     private String userName;
     private String email;
     private String password;
-    private MultipartFile image;
-    private String imagePath;
-    List<Favourite>favouriteList;
+
+    List<Restaurant>favouriteList;
+    List<Product> cartItems=new ArrayList<>();
     public User(){
 
     }
 
-    public User(int userId, String userName, String email, String password, MultipartFile image, String imagePath) {
+    public User(String userId, String userName, String email, String password) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
         this.password = password;
-        this.image = image;
-        this.imagePath = imagePath;
+
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -61,40 +61,33 @@ public class User {
         this.password = password;
     }
 
-    public MultipartFile getImage() {
-        return image;
-    }
 
-    public void setImage(MultipartFile image) {
-        this.image = image;
-    }
 
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public List<Favourite> getFavouriteList() {
+    public List<Restaurant> getFavouriteList() {
         return favouriteList;
     }
 
-    public void setFavouriteList(List<Favourite> favouriteList) {
+    public void setFavouriteList(List<Restaurant> favouriteList) {
         this.favouriteList = favouriteList;
+    }
+
+    public List<Product> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<Product> cartItems) {
+        this.cartItems = cartItems;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
+                "userId='" + userId + '\'' +
                 ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", image=" + image +
-                ", imagePath='" + imagePath + '\'' +
                 ", favouriteList=" + favouriteList +
+                ", cartItems=" + cartItems +
                 '}';
     }
 }

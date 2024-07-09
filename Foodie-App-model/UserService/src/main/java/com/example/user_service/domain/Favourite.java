@@ -1,4 +1,4 @@
-package com.example.user_service.domain;
+/*package com.example.user_service.domain;
 
 import org.springframework.data.annotation.Id;
 
@@ -83,3 +83,5 @@ private double rate;
                 '}';
     }
 }
+
+ */

@@ -9,10 +9,7 @@ import com.example.UserAuthentication.service.IUserService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1")
@@ -28,6 +25,9 @@ public class UserController {
     @PostMapping("/saveUser")
     public ResponseEntity save(@RequestBody User user) throws UserAlreadyExistException
     {
+        System.out.println("Received userName: " + user);
+
+
         try
         {
             responseEntity=new ResponseEntity<>(userService.saveUser(user),HttpStatus.OK);
@@ -44,11 +44,13 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity loginUser(@RequestBody User user) throws InvalidCredentialException
+    public ResponseEntity loginUser(@RequestParam("email") String email,@RequestParam String password) throws InvalidCredentialException
     {
+        System.out.println("Received email: " + email);
+        System.out.println("Received password: " + password);
         try
         {
-            User founUser = userService.findByEmailAndPassword(user.getEmail(),user.getPassword());
+            User founUser = userService.findByEmailAndPassword(email,password);
             responseEntity=new ResponseEntity<>(securityTokenGenerator.createToken(founUser), HttpStatus.OK);
         }
         catch (InvalidCredentialException e)

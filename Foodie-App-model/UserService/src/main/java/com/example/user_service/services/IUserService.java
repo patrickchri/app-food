@@ -1,20 +1,24 @@
 package com.example.user_service.services;
 
-import com.example.user_service.Exception.FavouriteAlreadyExistException;
-import com.example.user_service.Exception.FavouriteNotFoundException;
+import com.example.user_service.Exception.*;
 
-import com.example.user_service.Exception.UserAlreadyExistException;
-import com.example.user_service.Exception.UserNotFoundException;
-import com.example.user_service.domain.Favourite;
+import com.example.user_service.domain.Product;
+import com.example.user_service.domain.Restaurant;
 import com.example.user_service.domain.User;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface IUserService {
-    User register(String userName, String email, String password, MultipartFile image) throws UserAlreadyExistException;
+    User register(String userName,String email, String password) throws UserAlreadyExistException;
 
-    User addFavourites(Favourite favourite,int userId) throws FavouriteAlreadyExistException,UserNotFoundException;
-    User deleteFavourite(int id , int userId) throws UserNotFoundException, FavouriteNotFoundException;
-    List<Favourite> getAllFavourite(int userId) throws UserNotFoundException,FavouriteNotFoundException;
+    User addFavourites(Restaurant restaurant, String userId) throws FavouriteAlreadyExistException, UserNotFoundException;
+
+    User deleteFavourite(int id, String userId) throws UserNotFoundException, FavouriteNotFoundException;
+
+    List<Restaurant> getAllFavourite(String userId) throws UserNotFoundException, FavouriteNotFoundException;
+
+    User addCartItems(Product product, String userId) throws ProductAlreadyExistException,UserNotFoundException;
+
+    User removeCartItems(int id, String userId) throws ProductNotFoundException,UserNotFoundException;
+    List<Product>getCartItems(String userId) throws ProductNotFoundException,UserNotFoundException;
 }
